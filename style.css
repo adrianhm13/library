@@ -2,14 +2,26 @@ html, body{
     width: 100%;
     height: 100%;
     margin: 0;
+    background-color: #181a1b;
 }
 .showBooks{
-    width: 100%;
+    max-width: 1200px;
     height: 100%;
-    background-color: red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 15px 15px;
+    margin: 0 auto 0 auto;
 }
 .cardBook{
-    width: 10%;
-    height: 20%;
+    width: 100%;
+    height: 100%;
     background-color: green;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
