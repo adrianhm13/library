@@ -96,50 +96,95 @@ button{
 .cardBookLower h3{
     margin: 0 0 10px 0;
 }  
+
+.md-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	max-width: 630px;
+	min-width: 320px;
+	height: auto;
+	z-index: 2000;
+	visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+	visibility: visible;
+}
+
+.md-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(40,43,49,.8);
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Content styles */
+.md-content {
+    display:flex;
+    flex-direction: column;
+    padding: 35px;
+	color: white;
+    font-family: 'Roboto', sans-serif;
+	background: #424242;
+}
+/* Effect 1: Fade in and scale up */
+.md-effect-1 .md-content {
+	-webkit-transform: scale(0.7);
+	-ms-transform: scale(0.7);
+	transform: scale(0.7);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.md-show.md-effect-1 .md-content {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
+}
+input {
+    outline:none;
+}
+.slider-container {
+    display: flex;
+    width: 100%;
+    align-content: center;
+    margin-top: 25px;
+  }
+.slider {
+    width: 50%;
+}
+.slider-container p {
+    margin-left: 25px;
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-.addForm {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-  }
-  /* Modal Content/Box */
-.modal-content {
-    font-family: 'Roboto', sans-serif;
-    display:flex;
-    border-radius: 3px;
-    flex-direction: column;
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 25%;
-    transition: all 5s ease-in-out;
-  }
-.modal-content span{
-    font-family: 'Material Icons', sans-serif;
-    color: #5c6bc0;
-    font-size: 40px;
-    align-self: flex-end;
-    margin-right: 25px;
-}
-.modal-content span:hover,
-.modal-content span:focus {
-  color: #39437a;
-  text-decoration: none;
-  cursor: pointer;
 
-}
 
 @media only screen and (max-width: 600px) {
     .showBooks{

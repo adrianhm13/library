@@ -11,12 +11,20 @@
 </head>
 
 <body>
-    <div id="modalForm" class="addForm">
-        <div class="modal-content">
-            <span id="closeBtn" class="material-icons-outlined">
-                cancel
-                </span>
-            <p>Holaaa</p>
+    <div id="modal-1" class="md-modal md-effect-1">
+        <div class="md-content-background">
+            <div class="md-content">
+                <label for="input-author">Author's name:</label><br>
+                <input type="text" id="input-author" name="input-author">
+                <label for="input-title">Book's title:</label><br>
+                <input type="text" id="input-title" name="input-title">
+                <div class="slider-container">
+                    <label for="input-pages">Total pages:</label><br>
+                    <input type="range" id="input-range" name="input-range" min="1" max="3000" class="slider">
+                    <p id="text-slider">1</p>
+                </div>
+                <input type="Submit" id="AddBook">
+            </div>
         </div>
     </div>
     <div class="header">
@@ -24,7 +32,7 @@
             <h1>e-Library</h1>
         </div>
         <div>
-            <button type="button"  id="addBook" class="addBtn">
+            <button type="button" id="md-trigger" class="addBtn md-trigger">
                 <span class="material-icons-outlined">
                     add_circle
                 </span>
@@ -33,65 +41,7 @@
         </div>
     </div>
     <div class="showBooks">
-        <div class="cardBook">
-            <div class="cardBookUpper">
-                <img src="https://speckyboy.com/wp-content/uploads/2018/12/minimal-dekstop-wallpaper-04.jpg">
-            </div>
-            <div class="cardBookLower">
-                <h3>Lord of the Rings</h3>
-                <h3>Tolkien</h3>
-                <h3>256 pages</h3>
-                <h3>Have you enjoyed the read?</h3>
-            </div>
-        </div>
-        <div class="cardBook">
-            <div class="cardBookUpper">
-                <img
-                    src="https://c4.wallpaperflare.com/wallpaper/591/957/230/simple-background-digital-art-minimalism-artwork-wallpaper-preview.jpg">
-            </div>
-            <div class="cardBookLower">
-                <h3>Lord of the Rings</h3>
-                <h3>Tolkien</h3>
-                <h3>256 pages</h3>
-                <h3>Have you enjoyed the read?</h3>
-            </div>
-        </div>
-        <div class="cardBook">
-            <div class="cardBookUpper">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKwHRWWAwlt96infZK7yhBFHO6R1qDHs-Pyw&usqp=CAU">
-            </div>
-            <div class="cardBookLower">
-                <h3>Lord of the Rings</h3>
-                <h3>Tolkien</h3>
-                <h3>256 pages</h3>
-                <h3>Have you enjoyed the read?</h3>
-            </div>
-        </div>
-        <div class="cardBook">
-            <div class="cardBookUpper">
-                <img
-                    src="https://c4.wallpaperflare.com/wallpaper/591/957/230/simple-background-digital-art-minimalism-artwork-wallpaper-preview.jpg">
-            </div>
-            <div class="cardBookLower">
-                <h3>Lord of the Rings</h3>
-                <h3>Tolkien</h3>
-                <h3>256 pages</h3>
-                <h3>Have you enjoyed the read?</h3>
-            </div>
-        </div>
-        <div class="cardBook">
-            <div class="cardBookUpper">
-                <img
-                    src="https://c4.wallpaperflare.com/wallpaper/591/957/230/simple-background-digital-art-minimalism-artwork-wallpaper-preview.jpg">
-            </div>
-            <div class="cardBookLower">
-                <h3>Lord of the Rings</h3>
-                <h3>Tolkien</h3>
-                <h3>256 pages</h3>
-                <h3>Have you enjoyed the read?</h3>
-            </div>
-        </div>
+ 
     </div>
     <script src="script.js"></script>
 </body>
