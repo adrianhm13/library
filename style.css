@@ -120,21 +120,9 @@ button{
 	visibility: visible;
 }
 
-.md-overlay {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	visibility: hidden;
-	top: 0;
-	left: 0;
-	z-index: 1000;
-	opacity: 0;
-	background: rgba(40,43,49,.8);
-	-webkit-transition: all 0.3s;
-	transition: all 0.3s;
-}
 
-.md-show ~ .md-overlay {
+
+.md-show {
 	opacity: 1;
 	visibility: visible;
 }
@@ -143,11 +131,12 @@ button{
 .md-content {
     display:flex;
     flex-direction: column;
-    padding: 35px;
+    padding: 25px;
 	color: white;
     font-family: 'Roboto', sans-serif;
 	background: #424242;
 }
+
 /* Effect 1: Fade in and scale up */
 .md-effect-1 .md-content {
 	-webkit-transform: scale(0.7);
@@ -164,15 +153,43 @@ button{
 	transform: scale(1);
 	opacity: 1;
 }
+.close-modal {
+    position:absolute;
+    height: 20px;
+    top: -40px;
+    right: -20px;
+}
+.close-modal span{
+    font-family: "Material Icons";
+    font-size: 50px;
+    cursor:pointer;
+    color: #fc665c;
+    transition: color 0.7s;
+}
+.close-modal span:hover{
+    color: #ba000d;
+}
+.inputs-containers {
+    margin-top: 20px;
+}
 input {
     outline:none;
+}
+.checker-container {
+    display:flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.checker-container input {
+    margin-left: 20px;
 }
 .slider-container {
     display: flex;
     width: 100%;
     align-content: center;
-    margin-top: 25px;
+    margin-top: 20px;
   }
+
 .slider {
     width: 50%;
 }
