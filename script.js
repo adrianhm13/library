@@ -1,8 +1,8 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-    this.title = title
+function Book(author, title, pages, read) {
     this.author = author
+    this.title = title
     this.pages = pages
     this.read = read
 }
@@ -20,17 +20,39 @@ function addBookToLibrary(author, title, pages, read) {
     const divBook = document.createElement('div');    //Create divs for showing the book's information
     divBook.classList.add('cardBook')                 //Add the class to the card book
     divAllBooks.appendChild(divBook);                 //Append the child to the parent's div
+    
+    const cardContent = document.createElement('div');
+    divBook.appendChild(cardContent);
+
+    let dataNum = myLibrary.findIndex(books => books.title == title)  //Assign data-attribute with the index number so the user can delete it if wanted
+    divBook.setAttribute("data", dataNum);
+
+    const deleteBtnDiv = document.createElement('div')
+    deleteBtnDiv.classList.add("delete-book", "dbs-effect-1")
+    deleteBtnDiv.setAttribute("id", "delete-book-btn" + dataNum);
+    divBook.appendChild(deleteBtnDiv);
+    
+    const deleteBtnDivContent = document.createElement('div')
+    deleteBtnDivContent.classList.add("dbs-content");
+    deleteBtnDiv.appendChild(deleteBtnDivContent);
+
+    const deleteBtn = document.createElement('span')
+    deleteBtn.innerHTML = "cancel"
+    deleteBtn.classList.add("span");
+    deleteBtnDivContent.appendChild(deleteBtn);
+
 
     const cardUpper = document.createElement('div');  //Create two divs, upper side, lower side, to show the image and the text
     cardUpper.classList.add('cardBookUpper');
-    divBook.appendChild(cardUpper);
+    cardContent.appendChild(cardUpper);
+
     const imgUpper = document.createElement('img');
     imgUpper.src = picture
     cardUpper.appendChild(imgUpper);
 
     const cardLower = document.createElement('div');
     cardLower.classList.add('cardBookLower');
-    divBook.appendChild(cardLower);
+    cardContent.appendChild(cardLower);
 
     const authorText = document.createElement('h3');
     authorText.innerHTML = author;
@@ -43,6 +65,15 @@ function addBookToLibrary(author, title, pages, read) {
     const pagesText = document.createElement('h3');
     pagesText.innerHTML = pages + " pages";
     cardLower.appendChild(pagesText);
+
+    divBook.addEventListener('mouseenter', () => showDeleteBtn(dataNum));  //When hover, show delete book's button
+    divBook.addEventListener('mouseleave', () => showDeleteBtn(dataNum));
+}
+
+function showDeleteBtn(dataNum) {
+    const deleteBtnDiv = document.getElementById('delete-book-btn' + dataNum)
+    console.log(deleteBtnDiv)
+    deleteBtnDiv.classList.toggle("delete-book-show");
 }
 
 function inputValues() {  //Get the info from the user

@@ -68,21 +68,21 @@ button{
     margin: 25px auto 0 auto;
 }
 .cardBook{
-    display: flex;
-    flex-direction: column;
+    position: relative;
     width: 100%;
     height: 300px;
     background-color: #5c6bc0;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }  
 .cardBookUpper{
+    display:flex;
     height: 40%;
     border-bottom: 2px solid rgba(150, 150, 150, 0.363);
-    overflow: hidden;
+    overflow:hidden;
 }   
 .cardBookUpper img{
     max-width: 100%;
-
+    min-width: 100%;
 
 }
 .cardBookLower{
@@ -168,6 +168,53 @@ button{
 }
 .close-modal span:hover{
     color: #ba000d;
+}
+.delete-book {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+	z-index: 2000;
+	visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+.delete-book-show {
+    visibility: visible;
+    opacity: 0.5;
+}
+.dbs-content {
+    width: 100%;
+    height: 100%;
+	color: white;
+    font-family: 'Roboto', sans-serif;
+	background: #424242;
+}
+.dbs-effect-1 .dbs-content {
+	-webkit-transform: scale(0.7);
+	-ms-transform: scale(0.7);
+	transform: scale(0.7);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.delete-book-show.dbs-effect-1 .dbs-content {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+	opacity: 0.5;
+}
+.delete-book .dbs-content span {
+    font-family: "Material Icons";
+    font-size: 50px;
+    cursor:pointer;
+    color: #fc665c;
+    transition: color 0.7s;
 }
 .inputs-containers {
     margin-top: 20px;
