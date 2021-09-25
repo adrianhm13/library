@@ -68,6 +68,7 @@ function addBookToLibrary(author, title, pages, read) {
 
     divBook.addEventListener('mouseenter', () => showDeleteBtn(dataNum, cardContent));  //When hover, show delete book's button
     divBook.addEventListener('mouseleave', () => showDeleteBtn(dataNum, cardContent));
+    deleteBtn.addEventListener('click', () => deleteBook(divBook))
 }
 
 function showDeleteBtn(dataNum, cardContent) {
@@ -80,13 +81,22 @@ function showDeleteBtn(dataNum, cardContent) {
 
 }
 
+function deleteBook(parentDiv) {
+    parentDiv.remove();
+}
+
 function inputValues() {  //Get the info from the user
     const inputAuthor = document.getElementById("input-author").value;
     const inputTitle = document.getElementById("input-title").value;
     const inputPages = document.getElementById("input-range").value;
 
-    addBookToLibrary(inputAuthor, inputTitle, inputPages, inputAuthor);
-    showModalWindow();
+    if (inputAuthor === "" || inputTitle === "" || inputPages === "") {
+        alert("Required information not filled")
+    }else{
+        addBookToLibrary(inputAuthor, inputTitle, inputPages, inputAuthor);
+        showModalWindow();
+    }
+
 }
 
 function randomImg() {    //Get a random IMG to show in the card
