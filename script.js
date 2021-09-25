@@ -22,6 +22,7 @@ function addBookToLibrary(author, title, pages, read) {
     divAllBooks.appendChild(divBook);                 //Append the child to the parent's div
     
     const cardContent = document.createElement('div');
+    cardContent.classList.add('cardBook-content')
     divBook.appendChild(cardContent);
 
     let dataNum = myLibrary.findIndex(books => books.title == title)  //Assign data-attribute with the index number so the user can delete it if wanted
@@ -40,7 +41,6 @@ function addBookToLibrary(author, title, pages, read) {
     deleteBtn.innerHTML = "cancel"
     deleteBtn.classList.add("span");
     deleteBtnDivContent.appendChild(deleteBtn);
-
 
     const cardUpper = document.createElement('div');  //Create two divs, upper side, lower side, to show the image and the text
     cardUpper.classList.add('cardBookUpper');
@@ -66,14 +66,18 @@ function addBookToLibrary(author, title, pages, read) {
     pagesText.innerHTML = pages + " pages";
     cardLower.appendChild(pagesText);
 
-    divBook.addEventListener('mouseenter', () => showDeleteBtn(dataNum));  //When hover, show delete book's button
-    divBook.addEventListener('mouseleave', () => showDeleteBtn(dataNum));
+    divBook.addEventListener('mouseenter', () => showDeleteBtn(dataNum, cardContent));  //When hover, show delete book's button
+    divBook.addEventListener('mouseleave', () => showDeleteBtn(dataNum, cardContent));
 }
 
-function showDeleteBtn(dataNum) {
+function showDeleteBtn(dataNum, cardContent) {
+
+    cardContent.classList.toggle("dbs-blurred")
     const deleteBtnDiv = document.getElementById('delete-book-btn' + dataNum)
+    console.log(cardContent)
     console.log(deleteBtnDiv)
     deleteBtnDiv.classList.toggle("delete-book-show");
+
 }
 
 function inputValues() {  //Get the info from the user
@@ -106,6 +110,7 @@ submitBtn.addEventListener("click", inputValues);
 
 function showModalWindow() {
     modal.classList.toggle("md-show"); //you can list several class names 
+    modalBackground.classList.toggle("md-show");
 }
 
 const divAllBooks = document.querySelector('.showBooks');  //Find div's books parent
@@ -113,6 +118,8 @@ const divAllBooks = document.querySelector('.showBooks');  //Find div's books pa
 const addBookBtn = document.getElementById("md-trigger");  //Show modal window
 const modal = document.getElementById("modal-1");
 addBookBtn.addEventListener("click", showModalWindow);
+
+const modalBackground = document.getElementById("modal-background");
 
 const closeModal = document.getElementById("close-mw")  //Close modal window
 closeModal.addEventListener("click", showModalWindow);
