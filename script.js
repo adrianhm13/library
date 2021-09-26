@@ -1,4 +1,4 @@
-let myLibrary = [];
+const myLibrary = JSON.parse(localStorage.getItem('library')) || [];
 
 function Book(author, title, pages, read) {
     this.author = author
@@ -15,24 +15,30 @@ function addBookToLibrary(author, title, pages, read) {
     const newBook = new Book(author, title, pages, read);
     myLibrary.push(newBook);
 
+    saveLocal();
+    populateDiv(author, title, pages, read);
+
+}
+
+function populateDiv(author, title, pages, read) {      //Dos nuevas funciones, una con refreshGrid que envie el parametro de book desde el loop (aqui pasar todos los parametros a author, title, pages, etc)
+
     let picture = randomImg();
 
     const divBook = document.createElement('div');    //Create divs for showing the book's information
     divBook.classList.add('cardBook')                 //Add the class to the card book
     divAllBooks.appendChild(divBook);                 //Append the child to the parent's div
-    
+
     const cardContent = document.createElement('div');
     cardContent.classList.add('cardBook-content')
     divBook.appendChild(cardContent);
 
-    let dataNum = myLibrary.findIndex(books => books.title == title && books.author == author)  //Assign data-attribute with the index number so the user can delete it if wanted
-    divBook.setAttribute("data", dataNum);
+    divBook.setAttribute("data", author + " " + title);
 
     const deleteBtnDiv = document.createElement('div')
     deleteBtnDiv.classList.add("delete-book", "dbs-effect-1")
-    deleteBtnDiv.setAttribute("id", "delete-book-btn" + dataNum);
+    deleteBtnDiv.setAttribute("id", "delete-book-btn" + author + " " + title);
     divBook.appendChild(deleteBtnDiv);
-    
+
     const deleteBtnDivContent = document.createElement('div')
     deleteBtnDivContent.classList.add("dbs-content");
     deleteBtnDiv.appendChild(deleteBtnDivContent);
@@ -41,6 +47,11 @@ function addBookToLibrary(author, title, pages, read) {
     deleteBtn.innerHTML = "cancel"
     deleteBtn.classList.add("span");
     deleteBtnDivContent.appendChild(deleteBtn);
+
+    const bookReaded = document.createElement('span')
+    bookReaded.innerHTML = "bookmark_border"
+    bookReaded.classList.add("span");
+    deleteBtnDivContent.appendChild(bookReaded);
 
     const cardUpper = document.createElement('div');  //Create two divs, upper side, lower side, to show the image and the text
     cardUpper.classList.add('cardBookUpper');
@@ -66,23 +77,31 @@ function addBookToLibrary(author, title, pages, read) {
     pagesText.innerHTML = pages + " pages";
     cardLower.appendChild(pagesText);
 
-    divBook.addEventListener('mouseenter', () => showDeleteBtn(dataNum, cardContent));  //When hover, show delete book's button
-    divBook.addEventListener('mouseleave', () => showDeleteBtn(dataNum, cardContent));
-    deleteBtn.addEventListener('click', () => deleteBook(divBook))
+    divBook.addEventListener('mouseenter', () => showDeleteBtn(author, title, cardContent));  //When hover, show delete book's button
+    divBook.addEventListener('mouseleave', () => showDeleteBtn(author, title, cardContent));
+    deleteBtn.addEventListener('click', () => deleteBook(divBook, myLibrary, author, title));
+    bookReaded.addEventListener('click', () => bookChecked(bookReaded));
+
 }
 
-function showDeleteBtn(dataNum, cardContent) {
+function showDeleteBtn(author, title, cardContent) {
 
     cardContent.classList.toggle("dbs-blurred")
-    const deleteBtnDiv = document.getElementById('delete-book-btn' + dataNum)
-    console.log(cardContent)
-    console.log(deleteBtnDiv)
+    const deleteBtnDiv = document.getElementById('delete-book-btn' + author + " " + title)
     deleteBtnDiv.classList.toggle("delete-book-show");
 
 }
 
-function deleteBook(parentDiv) {
+function bookChecked(checker) {
+    checker.innerHTML = "bookmark";
+}
+function deleteBook(parentDiv, myLibrary, author, title) {
+
     parentDiv.remove();
+    let index = myLibrary.findIndex(books => books.title === title && books.author === author)   //Find the index matching, and delete the book
+    let newArray = myLibrary.splice(index, 1);
+    myLibrary = newArray;
+    saveLocal();
 }
 
 function inputValues() {  //Get the info from the user
@@ -90,14 +109,32 @@ function inputValues() {  //Get the info from the user
     const inputAuthor = document.getElementById("input-author").value;
     const inputTitle = document.getElementById("input-title").value;
     const inputPages = document.getElementById("input-range").value;
-
-    if (inputAuthor == "" || inputTitle == "") {
-        alert("Please fill the required information")
-    }else{
-        addBookToLibrary(inputAuthor, inputTitle, inputPages, inputAuthor);
-        showModalWindow();
+    if (!myLibrary.includes(inputAuthor) && !myLibrary.includes(inputTitle)) {
+        alert("You've already added this book")
+    } else {
+        if (inputAuthor == "" || inputTitle == "") {
+            alert("Please fill the required information")
+        } else {
+            addBookToLibrary(inputAuthor, inputTitle, inputPages, inputAuthor);
+            showModalWindow();
+        }
     }
 
+
+}
+
+function refreshPage() {
+    for (let book of myLibrary) {
+        let author = book.author;
+        let title = book.title;
+        let pages = book.pages;
+        let read = book.read;
+        populateDiv(author, title, pages, read)
+    }
+}
+
+function saveLocal() {
+    localStorage.setItem('library', JSON.stringify(myLibrary));  //Save in LocalStorage
 }
 
 function randomImg() {    //Get a random IMG to show in the card
@@ -145,3 +182,4 @@ slider.oninput = function () {
 }
 
 
+refreshPage();

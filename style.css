@@ -244,6 +244,12 @@ button{
     cursor:pointer;
     color: #fc665c;
     transition: color 0.7s;
+    margin-left: 10px;
+}
+.delete-book .dbs-content span:hover {
+    cursor:pointer;
+    color: #b34942;
+    transition: color 0.7s;
 }
 .inputs-containers {
     margin-top: 20px;
