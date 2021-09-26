@@ -103,14 +103,25 @@ function deleteBook(parentDiv, myLibrary, author, title) {
     myLibrary = newArray;
     saveLocal();
 }
-
+function bookIsInLibrary(author, title) {
+    for (let book = 0; book < myLibrary.length; book++) {
+        if (author === myLibrary[book].author && title === myLibrary[book].title) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 function inputValues() {  //Get the info from the user
 
     const inputAuthor = document.getElementById("input-author").value;
     const inputTitle = document.getElementById("input-title").value;
     const inputPages = document.getElementById("input-range").value;
-    if (!myLibrary.includes(inputAuthor) && !myLibrary.includes(inputTitle)) {
-        alert("You've already added this book")
+
+    let bookIsAdded = bookIsInLibrary(inputAuthor, inputTitle);
+    
+    if (bookIsAdded == true) {
+        alert("You've already added this book");
     } else {
         if (inputAuthor == "" || inputTitle == "") {
             alert("Please fill the required information")
@@ -119,7 +130,6 @@ function inputValues() {  //Get the info from the user
             showModalWindow();
         }
     }
-
 
 }
 
