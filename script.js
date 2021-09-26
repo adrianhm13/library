@@ -25,7 +25,7 @@ function addBookToLibrary(author, title, pages, read) {
     cardContent.classList.add('cardBook-content')
     divBook.appendChild(cardContent);
 
-    let dataNum = myLibrary.findIndex(books => books.title == title)  //Assign data-attribute with the index number so the user can delete it if wanted
+    let dataNum = myLibrary.findIndex(books => books.title == title && books.author == author)  //Assign data-attribute with the index number so the user can delete it if wanted
     divBook.setAttribute("data", dataNum);
 
     const deleteBtnDiv = document.createElement('div')
@@ -86,12 +86,13 @@ function deleteBook(parentDiv) {
 }
 
 function inputValues() {  //Get the info from the user
+
     const inputAuthor = document.getElementById("input-author").value;
     const inputTitle = document.getElementById("input-title").value;
     const inputPages = document.getElementById("input-range").value;
 
-    if (inputAuthor === "" || inputTitle === "" || inputPages === "") {
-        alert("Required information not filled")
+    if (inputAuthor == "" || inputTitle == "") {
+        alert("Please fill the required information")
     }else{
         addBookToLibrary(inputAuthor, inputTitle, inputPages, inputAuthor);
         showModalWindow();
