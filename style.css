@@ -7,6 +7,12 @@ html, body{
     padding: 0px;
     background-color: #181a1b05;
 }
+input,
+textarea,
+button,
+select {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 .header{
     display: flex;
     flex-direction: row;
