@@ -1,11 +1,16 @@
 const myLibrary = JSON.parse(localStorage.getItem('library')) || [];
 
-function Book(author, title, pages, read) {
-    this.author = author
-    this.title = title
-    this.pages = pages
-    this.read = read
-}
+class Book {
+    constructor(author, title, pages, read) {
+        this.author = author;
+        this.title = title;
+        this.pages = pages;
+        this.read = read;
+    }
+        sayInfo() {
+            console.log(this.title + ' by ' + this.author);
+        }
+    }
 
 Book.prototype.sayInfo = function () {
     console.log(this.title + " by " + this.author)
@@ -13,6 +18,7 @@ Book.prototype.sayInfo = function () {
 
 function addBookToLibrary(author, title, pages, read) {
     const newBook = new Book(author, title, pages, read);
+    newBook.sayInfo()
     myLibrary.push(newBook);
 
     saveLocal();
